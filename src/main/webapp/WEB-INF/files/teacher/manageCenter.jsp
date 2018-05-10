@@ -147,7 +147,7 @@
                 <!--End Advanced 课程中心 -->
             </div>
         </div>
-
+<%--
         <div class="row">
             <div class="col-lg-6">
                 <!--    Context Classes  -->
@@ -209,9 +209,9 @@
                     </div>
                 </div>
                 <!--  end  Context Classes  -->
-            </div>
+            </div>--%>
 
-            <div class="col-lg-6">
+            <div class="col-lg-pull-12">
                 <!--    Hover Rows  -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -237,30 +237,18 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
+                                    <th>序号</th>
+                                    <th>姓名</th>
+                                    <th>专业</th>
+                                    <th>班级</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
+                                    <td>褚德龙</td>
+                                    <td>计算机科学与技术</td>
+                                    <td>4</td>
                                 </tr>
                                 </tbody>
                             </table>

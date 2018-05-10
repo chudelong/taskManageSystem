@@ -49,7 +49,7 @@
 
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
 
                 <!--Simple table example -->
@@ -126,7 +126,7 @@
                         <div class="list-group">
 
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-envelope fa-fw"></i>你提交了作业
+                                <i class="fa fa-envelope fa-fw"></i>tom提交了作业
                                 <span class="pull-right text-muted small"><em>27 分钟之前</em>
                                     </span>
                             </a>
@@ -151,7 +151,7 @@
                 <!--End area chart example -->
             </div>
 
-            <div class="col-lg-4">
+           <%-- <div class="col-lg-4">
                 <div class="panel panel-primary text-center no-boder">
                     <div class="panel-body yellow">
                         <i class="fa fa-bar-chart-o fa-3x"></i>
@@ -193,7 +193,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div>--%>
 
         </div>
 

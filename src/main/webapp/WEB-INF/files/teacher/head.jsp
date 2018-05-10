@@ -27,7 +27,7 @@
     <!-- navbar-top-links -->
     <ul class="nav navbar-top-links navbar-right">
         <!-- main dropdown -->
-        <li class="dropdown">
+       <%-- <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <span class="top-label label label-danger">3</span><i class="fa fa-envelope fa-3x"></i>
             </a>
@@ -117,8 +117,8 @@
                 </li>
             </ul>
             <!-- end dropdown-tasks -->
-        </li>
-
+        </li>--%>
+<%--
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <span class="top-label label label-warning">5</span> <i class="fa fa-bell fa-3x"></i>
@@ -161,7 +161,7 @@
                 </li>
             </ul>
             <!-- end dropdown-alerts -->
-        </li>
+        </li>--%>
 
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
