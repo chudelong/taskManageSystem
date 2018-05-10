@@ -1,0 +1,8 @@
+[INFO][main][2018-04-14 12:53:36][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+[INFO][Thread-0][2018-04-14 12:53:36][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} closed
+[INFO][main][2018-04-14 12:54:02][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+[INFO][Thread-0][2018-04-14 12:54:02][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} closed
+[INFO][main][2018-04-14 16:22:05][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+[INFO][Thread-0][2018-04-14 16:22:42][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} closed
+[INFO][main][2018-04-14 16:23:23][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} inited
+[INFO][Thread-0][2018-04-14 16:23:23][com.alibaba.druid.pool.DruidDataSource] - {dataSource-1} closed

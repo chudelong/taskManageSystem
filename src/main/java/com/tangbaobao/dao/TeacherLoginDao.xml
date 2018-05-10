@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.TeacherLoginDao">
+    <select id="checkLogin" parameterType="Teacher" resultType="Teacher">
+        SELECT
+            teacherName,
+            teacherImg,
+            teacherNo,
+            teacherId
+        FROM
+            tb_teacher teacher
+        WHERE
+            teacher.teacherNo =#{teacherNo}
+            AND
+            teacher.teaceherPassword =#{teacherPassword}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,96 @@
+﻿//表单校验
+$(function(){
+		$("#stu_info_form").validate({
+			rules:{
+			"studentNo":{
+				"required":true,
+				"rangelength":[10,10] ,
+				"digits":true
+				},
+                "teacherNo":{
+                    "required":true,
+                    "rangelength":[10,10] ,
+                    "digits":true
+                },
+				"studentPassword":{
+					"required":true,
+					"rangelength":[6,16],
+					"stringCheck":true
+				},
+                "studentPassword":{
+                    "required":true,
+                    "rangelength":[6,16],
+                    "stringCheck":true
+                },
+				"checkCode":{
+					"required":true,
+					"stringCheck":true
+				},
+				"studentName":{
+					"required":true,
+					"rangelength":[2,5],
+					"chinese":true
+				},
+				"studentEmail":{
+					"required":true,
+					"email":true,
+				},
+				"repassword":{
+					"required":true,
+					"equalTo":"#studentPassword"
+				},
+				"prono":{
+					"required":true
+				}
+			},
+			messages:{
+			"studentNo":{
+				"required":"请输入学号",
+				"rangelength":"长度为10位",
+				"digits":"学号只能为数字"
+				},
+                "teacherNo":{
+                    "required":"请输入工号",
+                    "rangelength":"长度为10位",
+                    "digits":"工只能为数字"
+                },
+
+                "studentPassword":{
+					"required":"请输入密码",
+					"rangelength":"密码长度为6-16位",
+				},
+                "teacherPassword":{
+                    "required":"请输入密码",
+                    "rangelength":"密码长度为6-16位",
+                },
+				"checkCode":{
+					"required":"请输入验证码",
+					"stringCheck":"验证码只能为数字或字母"
+				},
+				"studentName":{
+					"required":"请输入真实姓名",
+					"rangelength":"姓名长度为2-5位",
+				},
+				"studentEmail":{
+					"required":"请输入邮箱",
+					"email":"请输入正确的邮箱",
+				},
+				"repassword":{
+					"required":"再次输入密码",
+					"equalTo":"密码不一致"
+				},
+                "prono":{
+                    "required":"该学院未开设专业"
+                }
+			}
+		});
+	});
+	
+	//隐藏初始提示信息
+	$(function(){
+		var err=$(".error").val();
+		if(err.length==0){
+			$(".error").hide();
+		}
+	});
+

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业提交管理系统</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet"/>
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/main-style1.css" rel="stylesheet"/>
+    <!-- 文件上传开始 -->
+    <link rel="stylesheet" href="assets/css/file_style.css">
+    <script src="assets/scripts/jquery-3.2.1.min.js"></script>
+    <script src="assets/scripts/file.js"></script>
+    <!-- 文件上传开始 -->
+    <!--时间插件-->
+    <script src="/assets/laydate/laydate.js"></script>
+    <script>
+        lay('#version').html('-v' + laydate.v);
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#deadLine' //指定元素
+        });
+    </script>
+
+    <!--自定义css开始-->
+    <link href="assets/css/selfContral1.css" rel="stylesheet"/>
+    <!--自定义css结束-->
+</head>
+
+<body>
+<!--  wrapper -->
+<div id="wrapper">
+    <!-- navbar top -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+        <!-- navbar-header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+                <span class="head_font" style="font-family: “Arial”,”Microsoft YaHei”,”黑体”,”宋体”,sans-serif;">作业管理<font
+                        style="color:rgb(150, 158, 157);">学生端</font></span>
+            </a>
+        </div>
+        <!-- end navbar-header -->
+        <!-- navbar-top-links -->
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- main dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="top-label label label-danger">3</span><i class="fa fa-envelope fa-3x"></i>
+                </a>
+                <!-- dropdown-messages -->
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong><span class=" label label-danger">教师名字</span></strong>
+                                <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                            </div>
+                            <div>数据结构老师发布了新的通知</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong><span class=" label label-info">唐学俊</span></strong>
+                                <span class="pull-right text-muted">
+                                        <em>昨天</em>
+                                    </span>
+                            </div>
+                            <div>完成了作业...</div>
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>读取所有消息</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- end dropdown-messages -->
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="top-label label label-success">4</span> <i class="fa fa-tasks fa-3x"></i>
+                </a>
+                <!-- dropdown tasks -->
+                <ul class="dropdown-menu dropdown-tasks">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>任务 1</strong>
+                                    <span class="pull-right text-muted">完成40% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                        <span class="sr-only">完成40%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>任务 4</strong>
+                                    <span class="pull-right text-muted">完成80% </span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                        <span class="sr-only">80%完成</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>查看所有任务</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- end dropdown-tasks -->
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="top-label label label-warning">5</span> <i class="fa fa-bell fa-3x"></i>
+                </a>
+                <!-- dropdown alerts-->
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i>新通知
+                                <span class="pull-right text-muted small">4 分钟之前</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-twitter fa-fw"></i>3 同学
+                                <span class="pull-right text-muted small">12 分钟之前</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-upload fa-fw"></i>设备重启
+                                <span class="pull-right text-muted small">4 分钟之前</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>查看所有</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- end dropdown-alerts -->
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-3x"></i>
+                </a>
+                <!-- dropdown user-->
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i>用户中心</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i>设置</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>退出登录</a>
+                    </li>
+                </ul>
+                <!-- end dropdown-user -->
+            </li>
+            <!-- end main dropdown -->
+        </ul>
+        <!-- end navbar-top-links -->
+
+    </nav>
+    <!-- end navbar top -->
+
+    <!-- navbar side -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <!-- sidebar-collapse -->
+        <div class="sidebar-collapse">
+            <!-- side-menu -->
+            <ul class="nav" id="side-menu">
+                <li>
+                    <!-- user image section-->
+                    <div class="user-section">
+                        <div class="user-section-inner">
+                            <img src="assets/img/user.jpg" alt="">
+                        </div>
+                        <div class="user-info">
+                            <div>Jonny <strong>Deen</strong></div>
+                            <div class="user-text-online">
+                                <span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Online
+                            </div>
+                        </div>
+                    </div>
+                    <!--end user image section-->
+                </li>
+                <li class="sidebar-search">
+                    <!-- search section-->
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="查找...">
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                    </div>
+                    <!--end search section-->
+                </li>
+                <li class="">
+                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>控制中心</a>
+                </li>
+
+                <li>
+                    <a href="timeline.html"><i class="fa fa-flask fa-fw"></i>时间戳</a>
+                </li>
+                <li>
+                    <a href="studentCenter.html"><i class="fa fa-table fa-fw"></i>课程中心</a>
+                </li>
+                <li class="selected">
+                    <a href="submitTask.html"><i class="fa fa-edit fa-fw"></i>发布作业</a>
+                </li>
+
+
+                <li>
+                    <a href="#"><i class="fa fa-files-o fa-fw"></i>测试页面<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="blank.html">空白页</a>
+                        </li>
+                        <li>
+                            <a href="login.html">登录页面</a>
+                        </li>
+                    </ul>
+                    <!-- second-level-items -->
+                </li>
+            </ul>
+            <!-- end side-menu -->
+        </div>
+        <!-- end sidebar-collapse -->
+    </nav>
+    <!-- end navbar side -->
+    <!--  page-wrapper -->
+    <div id="page-wrapper">
+        <div class="row">
+            <!-- page header -->
+            <div class="col-lg-12">
+                <h1 class="page-header">发布作业</h1>
+            </div>
+            <!--end page header -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Form Elements -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        作业发布
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <form action="#" method="post" enctype="multipart/form-data" id="submit">
+                                <div class="col-lg-12">
+                                    <h1>请选择发布信息</h1>
+
+                                    <div class="form-group">
+                                        <label>课程</label>
+                                        <select class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>作业类型</label>
+                                        <select class="form-control">
+                                            <option>实验</option>
+                                            <option>作业</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>截至时间</label>
+                                        <input type="text" name="deadLine" id="deadLine">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>备注信息</label>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+
+                                </div>
+
+
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="submit" class="btn btn-primary  " value="提交作业"></button>
+
+                            <button type="reset" class="btn btn-success">重新填写</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Form Elements -->
+            </div>
+        </div>
+    </div>
+    <!-- end page-wrapper -->
+
+</div>
+<!-- end wrapper -->
+
+<!--FOOTER Start-->
+<div class="footer">
+    <span class="footer_font" style="color:black">©2017-2018 糖糖工作室. All Rights Reserved.</span>
+</div>
+<!--FOOTER end-->
+
+<!-- Core Scripts - Include with every page -->
+<script src="assets/scripts/jquery-3.2.1.min.js"></script>
+<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="assets/plugins/pace/pace.js"></script>
+<script src="assets/scripts/siminta.js"></script>
+<script src="assets/scripts/index.js"></script>
+
+
+</body>
+
+</html>

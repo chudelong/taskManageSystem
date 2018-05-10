@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.StudentCourseCenterDao">
+    <select id="getCourseCategory" parameterType="String" resultType="Course">
+        SELECT
+            tb_course.courseId,
+            tb_course.courseName
+        FROM
+            tb_course,
+            tb_student,
+            tb_course_student
+        where
+            tb_course.courseId = tb_course_student.courseId
+            AND tb_course_student.studentId = tb_student.studentId
+            AND tb_student.studentNo = #{studentNo}
+    </select>
+
+    <select id="getCourseCategoryCount" resultType="int">
+        SELECT count(1)
+        FROM
+            tb_student s,
+            tb_course_student cs,
+            tb_course c,
+            tb_task t
+        WHERE
+            t.taskId NOT IN (SELECT `taskId`
+                             FROM tb_work
+                             WHERE studentNo = #{studentNo})
+            AND s.studentId = cs.studentId
+            AND c.courseId = cs.courseId
+            AND t.courseId = c.courseId
+            AND s.studentNo = #{studentNo}
+            AND c.courseId = #{courseId}
+    </select>
+
+    <!--对task进行封装-->
+    <resultMap id="taskMap" type="task">
+        <id property="taskId" column="taskId"/>
+        <result property="taskName" column="taskName"/>
+        <result property="taskTime" column="taskTime"/>
+        <result property="taskDesc" column="taskDesc"/>
+        <!--一对多关联-->
+        <association property="type" javaType="Type">
+            <id property="typeId" column="typeId"/>
+            <result property="typeName" column="typeName"/>
+        </association>
+        <association property="course" javaType="Course">
+            <id property="courseId" column="courseId"/>
+            <result property="courseName" column="courseName"/>
+        </association>
+        <collection property="workList" ofType="Work">
+            <id property="workId" column="workId"/>
+            <result property="workTime" column="workTime"/>
+            <result property="workStatue" column="workStatue"/>
+        </collection>
+    </resultMap>
+
+    <!--查询task-->
+    <select id="getAllTask" parameterType="String" resultMap="taskMap">
+        SELECT
+        temp.*,
+        tb_work.workId,
+        tb_work.workStatue,
+        tb_work.workTime
+        FROM
+        (SELECT
+        tb_task.taskId,
+        tb_task.taskName,
+        tb_task.taskTime,
+        tb_task.taskDesc,
+        tb_task.deadLine,
+        tb_task.typeId,
+        tb_task.courseId,
+        tb_course.courseName,
+        tb_type.typeName,
+        tb_student.studentNo
+        FROM
+        tb_task,
+        tb_course_student,
+        tb_student,
+        tb_course,
+        tb_type
+        WHERE
+        tb_task.courseId = tb_course.courseId
+        AND
+        tb_student.studentId = tb_course_student.studentId
+        AND
+        tb_course.courseId = tb_course_student.courseId
+        ) temp
+        LEFT JOIN
+        tb_work
+        ON
+        temp.taskId = tb_work.taskId
+        <where>
+            <if test="studentNo != null">
+                temp.studentNo = #{studentNo}
+            </if>
+            <if test="courseId">
+                AND
+                temp.courseId = #{courseId}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.StudentCenterDao">
+
+
+    <!--对学生进行封装-->
+    <resultMap id="studentInfo" type="student">
+        <id property="studentId" column="studentId"/>
+        <result property="studentNo" column="studentNo"/>
+        <result property="studentName" column="studentName"/>
+        <result property="studentSex" column="studentSex"/>
+        <result property="studentGrade" column="studentGrade"/>
+        <result property="studentEmail" column="studentEmail"/>
+        <result property="studentImg" column="studentImg"/>
+        <result property="studentDesc" column="studentDesc"/>
+        <result property="reg_time" column="reg_time"/>
+        <result property="studentStatue" column="studentStatue"/>
+        <!--学生多对一班级-->
+        <association property="sclass" javaType="Sclass">
+            <id property="classId" column="classId"/>
+            <result property="className" column="className"/>
+            <!--班级一对多专业-->
+            <association property="profession" javaType="Profession">
+                <id property="professionId" column="professionId"/>
+                <result property="professionName" column="professionName"/>
+                <!--专业学院一对多-->
+                <association property="college" javaType="college">
+                    <id property="collegeId" column="collegeId"/>
+                    <result property="collegeName" column="collegeName"/>
+                    <!--学院学校一对多-->
+                    <association property="school" javaType="School">
+                        <id property="schoolId" column="schoolId"/>
+                        <result property="schoolName" column="schoolName"/>
+                    </association>
+                </association>
+            </association>
+        </association>
+    </resultMap>
+    <!--根据学生No获取学生所有信息-->
+    <select id="getStudentInfo" parameterType="String" resultMap="studentInfo">
+        SELECT
+        sch.schoolId,
+        sch.schoolName,
+        pro.professionId,
+        pro.professionName,
+        college.collegeId,
+        college.collegeName,
+        class.classId,
+        class.className,
+        stu.studentId,
+        stu.studentNo,
+        stu.studentName,
+        stu.studentImg,
+        stu.studentSex,
+        stu.reg_time,
+        stu.studentDesc,
+        stu.studentEmail,
+        stu.studentGrade,
+        stu.studentStatue
+        FROM
+        tb_school sch,
+        tb_college college,
+        tb_profession pro,
+        tb_class class,
+        tb_student stu
+        <where>
+        sch.schoolId = college.schoolId
+        AND college.collegeId = pro.collegeId
+        AND pro.professionId = class.professionId
+        AND class.classId = stu.classId
+        <if test="studentNo != null">
+            AND stu.studentNo = ${studentNo}
+        </if>
+        </where>
+    </select>
+
+    <select id="countSubmittedTask" parameterType="String" resultType="Work" >
+        SELECT
+            `workId`,
+            `studentNo`,
+            `taskId`,
+            `workTime`,
+            `workStatue`
+        FROM
+            tb_work
+        WHERE
+            studentNo =#{studentNo}
+    </select>
+
+    <select id="countTask" resultType="Integer" parameterType="String">
+        SELECT
+            count( 1 ) unsubmit
+        FROM
+            tb_student s,
+            tb_course_student cs,
+            tb_course c,
+            tb_task t
+        WHERE
+            s.studentId = cs.studentId
+            AND c.courseId = cs.courseId
+            AND t.courseId = c.courseId
+            AND s.studentNo = #{studentNo}
+    </select>
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.TeacherManageCenterDao">
+    <select id="findAllCourse" parameterType="String" resultType="Course">
+        SELECT course.*
+        FROM
+            tb_course course,
+            tb_teach_course tc,
+            tb_teacher teacher
+        where
+            course.courseId = tc.couseId
+            AND
+            teacher.teacherId = tc.teacherId
+            AND
+            teacher.teacherNo = ${teacherNo}
+    </select>
+    <select id="findCountByCourseId" resultType="int">
+        SELECT count(1) count
+        FROM
+            tb_task task,
+            tb_teacher teacher,
+            tb_course course,
+            tb_teach_course tc
+        WHERE
+            task.courseId = course.courseId
+            AND
+            teacher.teacherId = tc.teacherId
+            AND
+            course.courseId = tc.couseId
+            AND
+            teacher.teacherNo = #{teacherNo}
+            AND
+            course.courseId = #{courseId}
+
+    </select>
+
+    <select id="findAllSubmitInfo" parameterType="String" resultType="submitTaskInfo">
+        SELECT
+            WORK.workId,
+            WORK.workTime,
+            workStatue,
+            task.taskName,
+            student.studentName,
+            type.typeName,
+            course.courseName
+        FROM
+            tb_course course,
+            tb_teach_course tc,
+            tb_teacher teacher,
+            tb_work WORK,
+            tb_task task,
+            tb_student student,
+            tb_type type
+        WHERE
+            course.courseId = tc.couseId
+            AND WORK.taskId = task.taskId
+            AND type.typeId = task.typeId
+            AND task.courseId = course.courseId
+            AND student.studentNo = WORK.studentNo
+            AND teacher.teacherId = tc.teacherId
+            AND teacher.teacherNo = ${teacherNo}
+    </select>
+</mapper>

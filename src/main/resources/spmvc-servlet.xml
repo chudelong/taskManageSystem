@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--扫描controller包-->
+    <context:component-scan base-package="com.tangbaobao.controller,com.tangbaobao.utils"/>
+    <!--配置处理器映射器-->
+    <!--配置处理器适配器-->
+    <mvc:annotation-driven/>
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/files/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--配置拦截器-->
+    <mvc:default-servlet-handler/>
+    <!--  <mvc:resources mapping="/assets/css/**" location="/WEB-INF/files/assets/css"/>
+      <mvc:resources mapping="/assets/js/**" location="/WEB-INF/files/assets/js"/>
+      <mvc:resources mapping="/assets/fonts/**" location="/WEB-INF/files/assets/fonts"/>
+      <mvc:resources mapping="/assets/plugins/**" location="/WEB-INF/files/assets/plugins"/>
+      <mvc:resources mapping="/assets/scripts/**" location="/WEB-INF/files/assets/scripts"/>
+      <mvc:resources mapping="/assets/img/**" location="/WEB-INF/files/assets/img"/>-->
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--除了登陆-->
+            <mvc:mapping path="/teacher/**"/>
+            <mvc:exclude-mapping path="/teacher/login.do"/>
+            <mvc:exclude-mapping path="/teacher/checkLogin.action"/>
+            <mvc:exclude-mapping path="/assets"/>
+            <bean class="com.tangbaobao.interceptor.TeacherInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/student/**"/>
+            <mvc:exclude-mapping path="/assets"/>
+            <bean class="com.tangbaobao.interceptor.StudentIntecptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

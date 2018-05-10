@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.LoginAndRegisterDao">
+
+
+    <!--查询器,负责所有查询功能-->
+    <select id="executeQuery" parameterType="student" resultType="student">
+        SELECT
+        `studentId`,
+        `classId`,
+        `studentNo`,
+        `studentName`,
+        `studentSex`,
+        `studentGrade`,
+        `studentPassword`,
+        `studentImg`,
+        `reg_time`,
+        `studentStatue`,
+        `studentDesc`
+        FROM tb_student
+        <where>
+            <if test="studentNo != null">
+                studentNo = #{studentNo}
+            </if>
+            <if test="studentPassword != null">
+                and studentPassword = #{studentPassword}
+            </if>
+        </where>
+    </select>
+    <insert id="register" parameterType="student">
+        INSERT INTO
+            tb_student
+            (
+                `studentId`,
+                `classId`,
+                `studentNo`,
+                `studentName`,
+                `studentSex`,
+                `studentGrade`,
+                `studentPassword`,
+                `studentImg`,
+                `reg_time`,
+                `studentStatue`,
+                `studentDesc`,
+                `studentEmail`
+            )
+        VALUES (
+            #{studentId},
+            #{sclass.classId},
+            #{studentNo},
+            #{studentName},
+            #{studentSex},
+            #{studentGrade},
+            #{studentPassword},
+            #{studentImg},
+            #{reg_time},
+            #{studentStatue},
+            #{studentDesc},
+            #{studentEmail}
+        )
+    </insert>
+
+    <!--查询所有学院-->
+    <select id="selectCollege" resultType="College">
+        SELECT
+            collegeId,
+            collegeName
+        FROM
+            tb_college
+    </select>
+    <!--根据学院查询所有专业-->
+    <select id="selectProfession" parameterType="String" resultType="Profession">
+        SELECT
+            professionId,
+            professionName
+        FROM
+            tb_profession
+        WHERE
+            collegeId = #{collegeId}
+    </select>
+    <!--根据专业查询班级-->
+    <select id="selectClass" parameterType="String" resultType="Sclass">
+        SELECT
+            classId,
+            className
+        FROM
+            tb_class
+        WHERE
+            professionId = #{professionId}
+
+    </select>
+
+</mapper>

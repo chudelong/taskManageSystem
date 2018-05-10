@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.TeacherAssignTaskDao">
+    <select id="loadAllCourse" parameterType="String" resultType="Course">
+        SELECT course.*
+        FROM
+            tb_course course,
+            tb_teacher teacher,
+            tb_teach_course tc
+        WHERE
+            course.courseId = tc.couseId
+            AND
+            teacher.teacherId = tc.teacherId
+            AND
+            teacher.teacherNo = #{teacherNo}
+    </select>
+    <select id="loadAllCourseByCourseId" resultType="Type">
+        SELECT tb_type.*
+        FROM
+            tb_type
+    </select>
+
+    <insert id="assignTask" useGeneratedKeys="true" keyProperty="taskId" keyColumn="taskId" parameterType="Task">
+        INSERT INTO
+        `task_system`.`tb_task`
+        (`taskId`, `typeId`, `courseId`, `taskName`, `taskTime`, `taskDesc`, `deadLine`)
+        VALUES
+            (null, #{type.typeId}, #{course.courseId},#{taskName}, #{taskTime}, #{taskDesc}, #{deadLine});
+    </insert>
+</mapper>

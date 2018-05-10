@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.TeacherIndexDao">
+    <resultMap id="teacher" type="Teacher">
+        <id property="teacherId" column="teacherId"/>
+        <result property="teacherNo" column="teacherNo"/>
+        <result property="teacherName" column="teacherName"/>
+        <result property="teacherImg" column="teacherImg"/>
+        <result property="teacherSex" column="teacherSex"/>
+        <association property="profession" javaType="Profession">
+            <!--<id property="professionId" column="professionId"/>-->
+            <result property="professionName" column="professionName"/>
+            <!--专业学院一对多-->
+            <association property="college" javaType="college">
+              <!--  <id property="collegeId" column="collegeId"/>-->
+                <result property="collegeName" column="collegeName"/>
+                <!--学院学校一对多-->
+                <association property="school" javaType="School">
+               <!--     <id property="schoolId" column="schoolId"/>-->
+                    <result property="schoolName" column="schoolName"/>
+                </association>
+            </association>
+        </association>
+    </resultMap>
+    <select id="getTeacherInfo" parameterType="String" resultMap="teacher">
+        SELECT
+            school.schoolName,
+            college.collegeName,
+            profession.professionName,
+            teacher.teacherId,
+            teacher.teacherName,
+            teacher.teacherNo,
+            teacher.teacherImg,
+            teacher.teacherSex
+        FROM
+            tb_teacher teacher,
+            tb_profession profession,
+            tb_college college,
+            tb_school school
+        WHERE
+            teacher.professionId = profession.professionId
+            AND profession.collegeId = college.collegeId
+            AND college.collegeId = school.schoolId
+            AND teacher.teacherNo = ${teacherNo}
+    </select>
+</mapper>

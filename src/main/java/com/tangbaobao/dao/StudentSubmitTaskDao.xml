@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangbaobao.dao.StudentSubmitTaskDao">
+
+    <insert id="insertTable" parameterType="Work">
+        INSERT INTO `task_system`.`tb_work`
+        (`workId`, `studentNo`, `taskId`, `workTime`, `workStatue`, `fileName`, `filePath`, `otherMessage`)
+            SELECT
+                null,
+                #{student.studentNo},
+                #{task.taskId},
+                #{workTime},
+                #{workStatue},
+                #{fileName},
+                #{filePath},
+                #{otherMessage}
+            FROM dual
+
+            WHERE not exists(select *
+                             from tb_work
+
+                             where tb_work.studentNo = #{student.studentNo} AND tb_work.taskId = #{task.taskId})
+    </insert>
+    <select id="getAllCourse" parameterType="String" resultType="Course">
+        SELECT
+        c.courseId,
+        c.courseName
+        FROM
+        tb_course c,
+        tb_student s,
+        tb_course_student cs
+        WHERE
+        c.courseId = cs.courseId
+        AND
+        s.studentId = cs.studentId
+        <if test="studentNo != null">
+            AND
+            s.studentNo = #{studentNo}
+        </if>
+    </select>
+    <select id="getAllTaskByCourseId" resultType="Task">
+        SELECT tb_task.*
+        FROM
+            tb_task,
+            tb_course,
+            tb_course_student,
+            tb_student
+        WHERE
+            tb_task.courseId = tb_course.courseId
+            AND
+            tb_course.courseId = tb_course_student.courseId
+            AND
+            tb_student.studentId = tb_course_student.studentId
+            AND
+            tb_student.studentNo = ${studentNo}
+            AND
+            tb_task.courseId = #{courseId}
+    </select>
+
+    <select id="getFileName" resultType="fileName">
+        SELECT
+            task.taskId,
+            task.taskName,
+            course.courseName,
+            student.studentName,
+            profession.professionName,
+            class.className,
+            student.studentNo
+        FROM
+            tb_task task,
+            tb_course course,
+            tb_student student,
+            tb_profession profession,
+            tb_class class
+        WHERE
+            task.courseId = course.courseId
+            AND
+            student.classId = class.classId
+            AND
+            class.professionId = profession.professionId
+            AND
+            task.taskId = #{taskId}
+            AND
+            student.studentNo = #{studentNo}
+
+    </select>
+
+    <select id="checkDeadLine" parameterType="int" resultType="Date">
+        select deadLine
+        from tb_task
+        where taskId = #{taskId}
+    </select>
+</mapper>
