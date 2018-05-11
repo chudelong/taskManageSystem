@@ -56,7 +56,7 @@ public class StudentSubmitTaskServiceImpl implements StudentSubmitTaskService {
             //类型文件夹
             String taskName = fileNameInfo.getTaskName() + File.separator;
             //获取文件
-            String path = "/root"+File.separator+"task"+File.separator + courseName + taskName;
+            String path = "C:"+File.separator+"task"+File.separator + courseName + taskName;
             System.out.println(path);
 
             System.err.println(path);
